@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cedar Grove Contact Tracing V4.1</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Stable Progressive Investigation</p>
+      <h1>Cedar Grove Contact Tracing V4.1</h1>
+      <p>Current-day-only Cedar Fever investigation. Prior interviews disappear after progression.</p>
+    </div>
+    <div class="header-actions">
+      <button id="progressBtn">Progress Investigation</button>
+      <button id="resetBtn" class="danger">Reset</button>
+    </div>
+  </header>
+
+  <div id="appStatus" class="status-bar">Loading investigation...</div>
+
+  <main class="layout">
+    <aside class="panel">
+      <section class="card">
+        <h2>Mission Briefing</h2>
+        <p>You may only view the current investigation stage. When you progress, the current interviews and routes disappear. Use the printable worksheet for handwritten notes.</p>
+        <p id="dayBadge" class="badge">Investigation Stage</p>
+      </section>
+
+      <section class="card">
+        <h2>Daily Case Update</h2>
+        <p id="dailyUpdate"></p>
+      </section>
+
+      <section class="card">
+        <h2>People Available Now</h2>
+        <input id="personSearch" type="search" placeholder="Search people or roles..." />
+        <div id="peopleList" class="people-list"></div>
+      </section>
+
+      <section class="card">
+        <h2>Active Routes</h2>
+        <p class="helper">Click a person once to open today’s interview and route. Click again to close it.</p>
+        <button id="clearRoutesBtn">Clear Routes</button>
+        <div id="activeRoutes" class="active-routes">No active routes.</div>
+      </section>
+    </aside>
+
+    <section class="map-column">
+      <section class="card map-toolbar">
+        <div>
+          <h2>Current-Day Map</h2>
+          <p>No all-days view is available.</p>
+        </div>
+      </section>
+      <svg id="townMap" viewBox="0 0 1000 650" role="img" aria-label="Cedar Grove current-day map">
+        <defs>
+          <marker id="routeArrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L6,3 z" fill="#F95B00"></path>
+          </marker>
+        </defs>
+        <rect width="1000" height="650" class="map-bg"></rect>
+        <g class="roads">
+          <path d="M70 110 H930"></path>
+          <path d="M70 300 H930"></path>
+          <path d="M70 510 H930"></path>
+          <path d="M170 55 V590"></path>
+          <path d="M400 55 V590"></path>
+          <path d="M640 55 V590"></path>
+          <path d="M835 55 V590"></path>
+        </g>
+        <g id="routeLayer"></g>
+        <g id="poiLayer"></g>
+      </svg>
+    </section>
+
+    <aside class="panel">
+      <section class="card">
+        <h2>Investigation Details</h2>
+        <div id="details" class="empty-state">Select a person or location to begin.</div>
+      </section>
+
+      <section class="card paper-reminder">
+        <h2>Handwritten Notes Required</h2>
+        <p>Digital notes are intentionally disabled. Use the printable worksheet. Prior-day interviews cannot be reopened after progression.</p>
+      </section>
+
+      <section id="finalPanel" class="card locked">
+        <h2>Final Response</h2>
+        <p id="lockMsg">Final response unlocks at the final stage.</p>
+        <div id="finalFields">
+          <label for="origin">Origin location</label>
+          <input id="origin" type="text" />
+          <label for="patientZero">Most likely patient zero</label>
+          <input id="patientZero" type="text" />
+          <label for="evidence">Evidence / CER</label>
+          <textarea id="evidence" rows="7"></textarea>
+          <button id="printFinalBtn">Export / Print Final Response</button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <section id="reportView" class="print-report"></section>
+  <script src="script.js"></script>
+</body>
+</html>
