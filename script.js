@@ -69,10 +69,14 @@ function renderApp() {
 function renderDayInfo() {
   byId("dayBadge").textContent = "Current Stage: Day " + state.day;
   byId("dailyUpdate").textContent = UPDATES[String(state.day)] || "No update available.";
+
   const progressBtn = byId("progressBtn");
   progressBtn.disabled = state.day >= MAX_DAY;
   progressBtn.textContent = state.day >= MAX_DAY ? "Final Stage Reached" : "Progress Investigation";
+
+  setStatus("Investigation loaded successfully. Current stage: Day " + state.day + ".");
 }
+``
 
 function renderPois() {
   const layer = byId("poiLayer");
